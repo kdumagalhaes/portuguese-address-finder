@@ -1,10 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
+import sys
 
 base_url = "https://www.codigo-postal.pt/"
 
-first = input("first ")
-second = input("second ")
+cep = sys.argv[1]
+
+cep_first_part = cep[:4]
+cep_second_part = cep[5:]
 
 
 def search_address(postal_code_first_part, postal_code_second_part):
@@ -26,4 +29,4 @@ def search_address(postal_code_first_part, postal_code_second_part):
         raise RuntimeError("Erro ao buscar endereço: {}".format(response.status_code))
 
 
-search_address(first, second)
+search_address(cep_first_part, cep_second_part)
