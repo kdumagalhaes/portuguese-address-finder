@@ -4,17 +4,25 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { useAddress } from "@/context/AddressContext"
 
 const Address = () => {
+  const {address} = useAddress()
+
+const hasAddress = Object.values(address).every((value) => value === "");
+
   return (
-  <Card className="w-[350px]">
+    !hasAddress && (
+    <Card className="w-[350px]">
     <CardHeader>
       <CardTitle>Morada</CardTitle>
     </CardHeader>
     <CardContent>
-      <p>Card Content</p>
+      <p>{address.street}</p>
+      <p>{address.local}</p>
     </CardContent>
   </Card>
+  )
   )
 }
 
