@@ -6,6 +6,7 @@ import {
   InputOTPSeparator
 } from "@/components/ui/input-otp"
 import { useEffect, useState } from "react"
+import { useAddress } from "@/context/AddressContext"
 
 interface PostalCode {
   firstPart: string,
@@ -14,6 +15,8 @@ interface PostalCode {
 
 const BASE_URL = "http://localhost:3000/api/search-address?cep="
  const PostalCodeInput = () => {
+ const {getAddress} = useAddress()
+
  const [postalCodeInput, setPostalCodeInput] = useState("")
 
  const normalizePostalCode = (postalCodeValue: string) => {
@@ -25,7 +28,15 @@ const BASE_URL = "http://localhost:3000/api/search-address?cep="
  const fetchPostalCode = async (postalCode: PostalCode) => {
       const response = await fetch(`${BASE_URL}${postalCode.firstPart}-${postalCode.secondPart}`);
       const data = await response.json();
-      console.log("data = ", data)
+      const parts = data.address.split(',');
+
+      const street = parts[0].split(':')[1].trim();
+      const local = parts[1].split(':')[1].trim();
+
+      getAddress({
+        street,
+        local
+      })
  }
 
  useEffect(() => {
@@ -38,6 +49,7 @@ const BASE_URL = "http://localhost:3000/api/search-address?cep="
 
   return (
     <InputOTP
+    className="mt-40"
     maxLength={7}
     pattern={REGEXP_ONLY_DIGITS}
     onChange={(value) => setPostalCodeInput(value)}
