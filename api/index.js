@@ -5,6 +5,7 @@ const app = express();
 const port = 3000;
 
 app.get("/api/search-address", async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
   const cep = req.query.cep;
   const address = await searchAddress(cep);
   res.json({ address });

@@ -29,4 +29,4 @@ def search_address(postal_code_first_part, postal_code_second_part):
         raise RuntimeError("Erro ao buscar endereço: {}".format(response.status_code))
 
 
-search_address(cep_first_part, cep_second_part)
+print(search_address(cep_first_part, cep_second_part))
