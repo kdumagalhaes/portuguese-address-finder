@@ -13,7 +13,8 @@ import {
     pattern={REGEXP_ONLY_DIGITS}
     render={({ slots }) => (
       <>
-        <InputOTPGroup>
+        <InputOTPGroup 
+        >
           {slots.slice(0, 4).map((slot, index) => (
             <InputOTPSlot key={index} {...slot} />
           ))}
