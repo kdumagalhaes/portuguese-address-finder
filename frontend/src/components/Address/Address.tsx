@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { useAddress } from "@/context/AddressContext"
 
 const Address = () => {
-  const {address} = useAddress()
+  const {address, clearAddress} = useAddress()
 
   const hasAddress = Object.values(address).every((value) => value === "");
 
@@ -24,7 +24,7 @@ const Address = () => {
       <p>{address.local}</p>
     </CardContent>
   </Card>
-  <Button onClick={() => console.log("hey")}>Limpar</Button>
+  <Button onClick={() => clearAddress()}>Limpar</Button>
 </>
   )
   )

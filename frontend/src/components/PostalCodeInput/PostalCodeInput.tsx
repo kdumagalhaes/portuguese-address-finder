@@ -15,7 +15,7 @@ interface PostalCode {
 
 const BASE_URL = "http://localhost:3000/api/search-address?cep="
  const PostalCodeInput = () => {
- const {getAddress} = useAddress()
+ const {getAddress, address} = useAddress()
 
  const [postalCodeInput, setPostalCodeInput] = useState("")
 
@@ -46,6 +46,11 @@ const BASE_URL = "http://localhost:3000/api/search-address?cep="
  // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [postalCodeInput])
 
+ useEffect(() => {
+  if (Object.values(address).every((value) => value === "")) {
+    setPostalCodeInput("")
+  }
+ }, [address])
 
   return (
     <InputOTP
@@ -54,6 +59,7 @@ const BASE_URL = "http://localhost:3000/api/search-address?cep="
     pattern={REGEXP_ONLY_DIGITS}
     onChange={(value) => setPostalCodeInput(value)}
     autoFocus
+    value={postalCodeInput}
     render={({ slots }) => (
       <>
         <InputOTPGroup>
