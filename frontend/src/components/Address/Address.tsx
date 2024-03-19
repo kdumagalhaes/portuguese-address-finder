@@ -4,16 +4,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 import { useAddress } from "@/context/AddressContext"
 
 const Address = () => {
   const {address} = useAddress()
 
-const hasAddress = Object.values(address).every((value) => value === "");
+  const hasAddress = Object.values(address).every((value) => value === "");
 
   return (
     !hasAddress && (
-    <Card className="w-[350px]">
+<>
+<Card className="w-[350px]">
     <CardHeader>
       <CardTitle>Morada</CardTitle>
     </CardHeader>
@@ -22,6 +24,8 @@ const hasAddress = Object.values(address).every((value) => value === "");
       <p>{address.local}</p>
     </CardContent>
   </Card>
+  <Button onClick={() => console.log("hey")}>Limpar</Button>
+</>
   )
   )
 }
