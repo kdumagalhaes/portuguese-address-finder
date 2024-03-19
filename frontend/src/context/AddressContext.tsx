@@ -6,7 +6,8 @@ interface AddressProviderProps {
 
 interface AddressContextModel {
   address: Address,
-  getAddress: (address: Address) => void
+  getAddress: (address: Address) => void,
+  clearAddress: () => void
 }
 
 interface Address {
@@ -24,8 +25,13 @@ export const AddressProvider = ({children}: AddressProviderProps) => {
     setAddress(address)
   }
 
+  const clearAddress = () => {
+    setAddress({street: "", local: ""})
+  }
+
   const value = {
     getAddress,
+    clearAddress,
     address
   }
 
